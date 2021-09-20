@@ -39,6 +39,15 @@
 						"filenamePattern": "*.pawdraw"
 					}
 				]
+			},
+			{
+				"viewType": "catCustoms.asciinema",
+				"displayName": "Asciinema Player",
+				"selector": [
+					{
+						"filenamePattern": "*.cast"
+					}
+				]
 			}
 		],
 		"commands": [
