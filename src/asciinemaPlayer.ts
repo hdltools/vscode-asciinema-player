@@ -24,9 +24,15 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 		webviewPanel.webview.options = {
 			enableScripts: true,
 		}
-		webviewPanel.webview.html = AsciinemaPlayerProvider.loadHTML(path.join(this.context.extensionPath, 'web', 'index.html'))
+		webviewPanel.webview.html = this.getHTML(webviewPanel.webview)
+		const chgDoc = vscode.workspace.onDidChangeTextDocument(e => {
+			if(e.document.uri.toString() === document.uri.toString()) {
+				
+			}
+		})
 		const recv = webviewPanel.webview.onDidReceiveMessage(this.receive)
 		webviewPanel.onDidDispose(() => {
+			chgDoc.dispose()
 			recv.dispose()
 		})
 	}
@@ -36,17 +42,22 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 	}
 
 	static loadHTML(htmlPath: string): string {
-		const [_webRoot, _htmlPath] = fs.statSync(htmlPath).isDirectory() ?
-			[htmlPath, path.join(htmlPath, 'index.html')]
-			: [path.dirname(htmlPath), htmlPath]
-		const vscodeWebRoot = vscode.Uri.file(_webRoot).with({scheme: 'vscode-resource'})
 		try {
-			const htmlContent = fs.readFileSync(_htmlPath, 'utf-8')
-			.replace(/<base>/, `<base href=${vscodeWebRoot}`)
+			const htmlContent = fs.readFileSync(htmlPath, 'utf-8')
 			return htmlContent
 		} catch(error) {
 			console.error(error)
 			return ''
 		}
+	}
+
+	private getHTML(webview: vscode.Webview): string {
+		const webRoot = path.join(this.context.extensionPath, 'web')
+		const rootUri = webview.asWebviewUri(vscode.Uri.file(webRoot))
+		const html = AsciinemaPlayerProvider.loadHTML(path.join(webRoot, 'index.html'))
+		const _html = html.replace(/src="/g, `src="${rootUri}/`)
+		.replace(/href="/g, `href="${rootUri}/`)
+		.replace(/<base>/, `<meta http-equiv="Content-Security-Policy" content="default-src ${webview.cspSource};">`)
+		return _html
 	}
 }

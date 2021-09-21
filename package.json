@@ -13,6 +13,7 @@
 	"activationEvents": [
 		"onCustomEditor:catCustoms.catScratch",
 		"onCustomEditor:catCustoms.pawDraw",
+		"onCustomEditor:catCustoms.asciinema",
 		"onCommand:catCustoms.pawDraw.new"
 	],
 	"repository": {
