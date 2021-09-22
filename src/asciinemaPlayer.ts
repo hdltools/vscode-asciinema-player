@@ -7,7 +7,11 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 
 	public static register(context: vscode.ExtensionContext): vscode.Disposable {
 		const provider = new AsciinemaPlayerProvider(context)
-		const providerRegistration = vscode.window.registerCustomEditorProvider(AsciinemaPlayerProvider.viewType, provider)
+		const providerRegistration = vscode.window.registerCustomEditorProvider(AsciinemaPlayerProvider.viewType, provider, {
+			webviewOptions: {
+				retainContextWhenHidden: true,
+			}
+		})
 		return providerRegistration
 	}
 
