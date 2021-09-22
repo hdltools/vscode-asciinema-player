@@ -25,13 +25,20 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 		webviewPanel: vscode.WebviewPanel,
 		_token: vscode.CancellationToken
 	): Promise<void> {
+		function updateWebview() {
+			webviewPanel.webview.postMessage({
+				type: 'update',
+				name: path.basename(document.uri.path),
+				body: document.getText(),
+			})
+		}
 		webviewPanel.webview.options = {
 			enableScripts: true,
 		}
 		webviewPanel.webview.html = this.getHTML(webviewPanel.webview)
 		const chgDoc = vscode.workspace.onDidChangeTextDocument(e => {
 			if(e.document.uri.toString() === document.uri.toString()) {
-				
+				updateWebview()
 			}
 		})
 		const recv = webviewPanel.webview.onDidReceiveMessage(this.receive)
@@ -39,6 +46,7 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 			chgDoc.dispose()
 			recv.dispose()
 		})
+		updateWebview()
 	}
 
 	private receive(message: object): void {
@@ -61,7 +69,7 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 		const html = AsciinemaPlayerProvider.loadHTML(path.join(webRoot, 'index.html'))
 		const _html = html.replace(/src="/g, `src="${rootUri}/`)
 		.replace(/href="/g, `href="${rootUri}/`)
-		.replace(/<base>/, `<meta http-equiv="Content-Security-Policy" content="default-src ${webview.cspSource};">`)
+		.replace(/<base>/, `<meta http-equiv="Content-Security-Policy" content="default-src ${webview.cspSource} blob:;">`)
 		return _html
 	}
 }
