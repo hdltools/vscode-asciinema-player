@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as vscode from 'vscode'
 
 export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider {
-	private static readonly viewType = 'catCustoms.asciinema'
+	private static readonly viewType = 'asciinemaPlayer.cast'
 
 	public static register(context: vscode.ExtensionContext): vscode.Disposable {
 		const provider = new AsciinemaPlayerProvider(context)
@@ -41,16 +41,10 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 				updateWebview()
 			}
 		})
-		const recv = webviewPanel.webview.onDidReceiveMessage(this.receive)
 		webviewPanel.onDidDispose(() => {
 			chgDoc.dispose()
-			recv.dispose()
 		})
 		updateWebview()
-	}
-
-	private receive(message: object): void {
-
 	}
 
 	static loadHTML(htmlPath: string): string {
