@@ -1,9 +1,9 @@
 {
-	"name": "cat-customs",
-	"displayName": "Cat Customs",
-	"description": "Custom Editor API Samples",
+	"name": "asciinema-player",
+	"displayName": "Asciinema Player",
+	"description": "Asciinema Player",
 	"version": "0.0.1",
-	"publisher": "vscode-samples",
+	"publisher": "congeal",
 	"engines": {
 		"vscode": "^1.46.0"
 	},
@@ -11,51 +11,23 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCustomEditor:catCustoms.catScratch",
-		"onCustomEditor:catCustoms.pawDraw",
-		"onCustomEditor:catCustoms.asciinema",
-		"onCommand:catCustoms.pawDraw.new"
+		"onCustomEditor:asciinemaPlayer.cast"
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/microsoft/vscode-extension-samples.git"
+		"url": "https://github.com/congeal/vscode-asciinema-player.git"
 	},
 	"main": "./out/extension.js",
 	"contributes": {
 		"customEditors": [
 			{
-				"viewType": "catCustoms.catScratch",
-				"displayName": "Cat Scratch",
-				"selector": [
-					{
-						"filenamePattern": "*.cscratch"
-					}
-				]
-			},
-			{
-				"viewType": "catCustoms.pawDraw",
-				"displayName": "Paw Draw",
-				"selector": [
-					{
-						"filenamePattern": "*.pawdraw"
-					}
-				]
-			},
-			{
-				"viewType": "catCustoms.asciinema",
+				"viewType": "asciinemaPlayer.cast",
 				"displayName": "Asciinema Player",
 				"selector": [
 					{
 						"filenamePattern": "*.cast"
 					}
 				]
-			}
-		],
-		"commands": [
-			{
-				"command": "catCustoms.pawDraw.new",
-				"title": "Create new Paw Draw Document",
-				"category": "Paw Draw"
 			}
 		]
 	},
