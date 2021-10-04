@@ -6,3 +6,7 @@
 
 ## 사용 방법
 `*.cast` file을 VS Code로 열면, 텍스트 에디팅 pane 대신에 Asciinema player가 담긴 WebView가 열립니다.
+
+## References
+* [Asciinema](https://asciinema.org)
+* [Asciinema player](https://github.com/asciinema/asciinema-player)
