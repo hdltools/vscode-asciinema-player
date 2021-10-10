@@ -1,0 +1,15 @@
+{
+  "name": "web-vscode-asciinema-player",
+  "version": "0.0.1",
+  "description": "Webpage for VSCode Asciinema Player",
+  "author": "HDLTools",
+  "license": "MIT",
+  "dependencies": {
+    "asciinema-player": "^2.6.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    }
+  }
+}
