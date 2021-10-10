@@ -1,9 +1,9 @@
 {
-	"name": "asciinema-player",
-	"displayName": "Asciinema Player",
-	"description": "Asciinema Player",
+	"name": "vscode-asciinema-player",
+	"displayName": "VSCode Asciinema Player",
+	"description": "Asciinema Player as a VSCode extension",
 	"version": "0.0.1",
-	"publisher": "congeal",
+	"publisher": "HDLTools",
 	"engines": {
 		"vscode": "^1.46.0"
 	},
@@ -35,7 +35,8 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"lint": "eslint . --ext .ts,.tsx",
-		"watch": "tsc -w -p ./"
+		"watch": "tsc -w -p ./",
+		"postinstall": "cd web; npm i"
 	},
 	"devDependencies": {
 		"@types/node": "^12.12.0",

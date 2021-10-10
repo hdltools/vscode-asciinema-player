@@ -7,6 +7,32 @@
 ## 사용 방법
 `*.cast` file을 VS Code로 열면, 텍스트 에디팅 pane 대신에 Asciinema player가 담긴 WebView가 열립니다.
 
+## 개발
+### 라이브러리 설치
+npm을 이용해 라이브러리를 설치합니다.
+```
+$ npm install
+```
+### Debug
+VSCode를 실행하고, `^F5`를 눌러서 디버거를 실행
+### Package 생성 및 사용
+* VSCE 설치  
+[VSCE](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)는 VSCode extension package 프로그램으로, Global 설치를 권장하고 있습니다.  
+아래 명령으로 global 설치가 가능합니다:
+```
+$ npm install -g vsce
+``` 
+`--save-dev`로 개발 패키지에 포함시킬 수도 있지만, VSCE 메뉴얼에 있는 가이드를 따릅니다.
+* Package 생성  
+vsce를 이용해 패키지 생성이 가능합니다:
+```
+$ vsce package
+```
+* Package 설치  
+아직, market place에 올리지 않았으므로, 생성된 .vsix 파일을 이용해 설치합니다.
+
+
+
 ## References
 * [Asciinema](https://asciinema.org)
 * [Asciinema player](https://github.com/asciinema/asciinema-player)
