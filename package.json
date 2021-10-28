@@ -29,7 +29,17 @@
 					}
 				]
 			}
-		]
+		],
+		"configuration": {
+			"title": "asciinemaPlayer",
+			"properties": {
+			  "asciinemaPlayer.useAutoPlay": {
+				"type": "boolean",
+				"default": true,
+				"description": "Control flag for autoplay property."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

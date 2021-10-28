@@ -60,10 +60,16 @@ export class AsciinemaPlayerProvider implements vscode.CustomTextEditorProvider 
 	private getHTML(webview: vscode.Webview): string {
 		const webRoot = path.join(this.context.extensionPath, 'web')
 		const rootUri = webview.asWebviewUri(vscode.Uri.file(webRoot))
+		const config = vscode.workspace.getConfiguration('asciinemaPlayer')
+		var property = "preload"
+		if(config.get("useAutoPlay") == true){
+			property = property + " autoplay"
+		}
 		const html = AsciinemaPlayerProvider.loadHTML(path.join(webRoot, 'index.html'))
 		const _html = html.replace(/src="/g, `src="${rootUri}/`)
-		.replace(/href="/g, `href="${rootUri}/`)
-		.replace(/<base>/, `<meta http-equiv="Content-Security-Policy" content="default-src ${webview.cspSource} blob:;">`)
+			.replace(/href="/g, `href="${rootUri}/`)
+			.replace(/<base>/, `<meta http-equiv="Content-Security-Policy" content="default-src ${webview.cspSource} blob:;">`)
+			.replace(/property/g, `${property}`)
 		return _html
 	}
 }
